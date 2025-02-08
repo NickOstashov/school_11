@@ -1,7 +1,12 @@
 from plan_text import *
 
 def start_add_task(week: dict) -> None:
-    pass
+    choice_day = input(CHOICE_DAY_TO_ADD_TASK)
+    if choice_day in week:
+        task = input(INPUT_TASK_TEXT)
+        week[choice_day].add(task)
+    else:
+        print(NO_SEARCH_DAY)
 
 def start_output_task(week: dict) -> None:
     pass
