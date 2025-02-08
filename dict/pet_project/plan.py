@@ -8,6 +8,7 @@ def start_add_task(week: dict) -> None:
     else:
         print(NO_SEARCH_DAY)
 
+
 def start_output_task(week: dict) -> None:
     day_or_week = input(DAY_OR_WEEK)
     if day_or_week == '1':
@@ -21,6 +22,7 @@ def start_output_task(week: dict) -> None:
     else:
         print(NO_SEARCH_COMMAND)
 
+
 def get_max_len(tasks : list) -> int:
     max_len = len(tasks[0])
     for task in tasks:
@@ -29,16 +31,20 @@ def get_max_len(tasks : list) -> int:
 
     return max_len
 
+
 def print_day(week: dict, day: str) -> None:
     max_len = get_max_len(week[day]) + 2
     print('+', '-'*max_len, '+')
     print('|',' ')
 
+
 def print_week(week: dict) -> None:
     pass
 
+
 def start_remove_task(week: dict) -> None:
     pass
+
 
 def main():
     week = {
