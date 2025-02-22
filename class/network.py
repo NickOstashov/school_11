@@ -18,19 +18,24 @@ class User:
         self.friend_list.append(other)
         other.friend_list.append(self)
 
-    def _print_friend(self) -> int:
+    def _print_friend(self):
         print("Ваш список друзей")
         for i in range(0, len(self.friend_list)):
             print(f"{i+1}. {self.friend_list[i]}")
 
         friend_number = input("Выберите друга для удаления / иначе 0 : ")
         if friend_number == '0':
-            return -1
+            return None
 
-        return int(friend_number)
+        return self.friend_list[int(friend_number) - 1]
 
     def remove_friend(self):
-        return self._print_friend()
+        user = self._print_friend()
+        if user is None:
+            return
+
+        #user_uuid = self.friend_list[user_idx-1].uuid
+        self.friend_list.remove(user)
 
     def __len__(self):
         return len(self.friend_list)
@@ -46,6 +51,7 @@ def main():
     user_1.add_friend(user_2)
 
     user_1.remove_friend()
+    user_1.print_info()
 
 
 
