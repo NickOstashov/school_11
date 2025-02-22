@@ -15,7 +15,9 @@ def main():
     #car1.print_info()
 
     car2 = Car("Черный", 4, "электричество")
-    car2.print_info()
+    #print(len(car2))
+
+    print(car1 > car2)
 
 
 
