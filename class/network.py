@@ -30,12 +30,12 @@ class User:
         return self.friend_list[int(friend_number) - 1]
 
     def remove_friend(self):
-        user = self._print_friend()
+        user : "User" = self._print_friend()
         if user is None:
             return
 
-        #user_uuid = self.friend_list[user_idx-1].uuid
         self.friend_list.remove(user)
+        user.friend_list.remove(self)
 
     def __len__(self):
         return len(self.friend_list)
@@ -52,6 +52,8 @@ def main():
 
     user_1.remove_friend()
     user_1.print_info()
+    print("-"*10)
+    user_2.print_info()
 
 
 
