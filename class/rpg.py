@@ -12,21 +12,33 @@ class Character:
         self.armor = armor
         self.stamin = stamin
         self.weapon = weapon
+        self.is_dead = False
 
     def attack(self, other_character : 'Character'):
-        print(f"{self.__class__.__name__} атакует {other_character.__class__.__name__} оружием {self.weapon.name}")
+        print(f"[*]{self.__class__.__name__} атакует {other_character.__class__.__name__} оружием {self.weapon.name}")
         if other_character.armor > 0:
             other_character.armor -= self.weapon.dmg
-            print(f"Уровень брони врага снизился до {other_character.armor}")
+            print(f"[*]Уровень брони врага снизился до {other_character.armor}")
         else:
             other_character.hp -= self.weapon.dmg
-            print(f"Уровень HP врага снизился до {other_character.hp}")
+            print(f"[*]Уровень HP врага снизился до {other_character.hp}")
 
         if other_character.hp <= 0:
             other_character.rip()
 
     def rip(self):
-        print(f"Храбрый {self.__class__.__name__} героически погиб на поле боя")
+        self.is_dead = True
+        print(f"[*]Храбрый {self.__class__.__name__} героически погиб на поле боя")
+
+    def take_weapon(self, other: "Character"):
+        if other.is_dead:
+            self.weapon = other.weapon
+            print(f"[*]{self.__class__.__name__} отнимаем оружие {other.weapon.name}")
+            other.weapon = Weapon('руки', 5, 5)
+        else:
+            print(f"{other.__class__.__name__} ещё жив")
+            other.attack(self)
+
 
 class MagicStaff(Weapon):
     def __init__(self, name, dmg, stamin, mp):
@@ -51,6 +63,14 @@ def main():
 
     ms = MagicStaff("магический посох", 100, 10, 20)
     wz = Wizard("магия", 100, 0, 100, ms, 100)
+
+    for i in range(6):
+        wr.attack(wz)
+
+    if wz.is_dead:
+        wr.weapon = wz.take_weapon()
+
+    print(wr.weapon.name)
 
 if __name__ == "__main__":
     main()
