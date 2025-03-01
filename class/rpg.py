@@ -14,10 +14,13 @@ class Character:
         self.weapon = weapon
 
     def attack(self, other_character : 'Character'):
+        print(f"{self.__class__.__name__} атакует {other_character.__class__.__name__} оружием {self.weapon.name}")
         if other_character.armor > 0:
             other_character.armor -= self.weapon.dmg
+            print(f"Уровень брони врага снизился до {other_character.armor}")
         else:
             other_character.hp -= self.weapon.dmg
+            print(f"Уровень HP врага снизился до {other_character.hp}")
 
         if other_character.hp <= 0:
             other_character.rip()
@@ -43,8 +46,11 @@ class Warrior(Character):
 
 
 def main():
-    pass
+    wr_wp = Weapon("меч", 20, 10)
+    wr = Warrior("сила", 300, 200, 100, wr_wp)
 
+    ms = MagicStaff("магический посох", 100, 10, 20)
+    wz = Wizard("магия", 100, 0, 100, ms, 100)
 
 if __name__ == "__main__":
     main()
