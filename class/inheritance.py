@@ -12,14 +12,23 @@ class Animal:
 
 
 class Cat(Animal):
-    def __init__(self, skin, color, kind):
+    def __init__(self, skin, color, kind, night_vision):
+        self.night_vision = night_vision
         super().__init__(skin, color, kind)
+
+    def down(self):
+        print(f"{self.kind} приземлился на лапы")
+
+
+class HomeCat(Cat):
+    def __init__(self, skin, color, kind, night_vision):
+        super().__init__(skin, color, kind, night_vision)
 
 
 def main():
-    cat = Cat("шерсть", "черно-белый", "домашний")
-    print(cat)
-    cat.move()
+    home_cat = HomeCat("шерсть", "черно-белый", "домашний кот", True)
+    print(home_cat)
+    home_cat.move()
 
 
 if __name__ == "__main__":
